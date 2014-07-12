@@ -12,8 +12,7 @@ def parseArguments() :
                         help='Shifts number (>=0)')
     parser.add_argument('-r', '--right', action='store_true', 
                         help='Shift to the right side')
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help='Display workspace switches')
+    parser.add_argument('-v', '--verbose', action='store_true')
 
     args = parser.parse_args()
 
@@ -69,6 +68,6 @@ if __name__=='__main__':
     except i3Exception:
         logging.critical('Communication with i3 failed')
         exit(1)
-            
+           hi
     exit(0)
 
