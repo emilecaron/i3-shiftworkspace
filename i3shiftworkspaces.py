@@ -68,6 +68,5 @@ if __name__=='__main__':
     except i3Exception:
         logging.critical('Communication with i3 failed')
         exit(1)
-           hi
     exit(0)
 
