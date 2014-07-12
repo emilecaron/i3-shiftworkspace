@@ -14,7 +14,7 @@ Retrieve
 
 Run
 
-    $ cd i3-shiftworkspace && ./i3-shiftworkspaces.py
+    $ cd i3-shiftworkspace && ./i3shiftworkspaces.py
 
 Done. 
 
