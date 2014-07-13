@@ -6,6 +6,9 @@ from argparse import ArgumentParser
 from logging import INFO, WARNING, basicConfig, info, critical
 
 
+# only workspaces with numbers are managed (binded to super+nb by default)
+ALLOWED = [str(i+1) for i in range(10)]   
+
 def parseArguments() :
     """
     Parse the command line arguments.
@@ -32,16 +35,11 @@ def shift_workspaces(count, right):
     return : 0 on success, 1 on error
     """
 
-    # only workspaces with numbers are managed (binded to super+nb by default)
-    allowed = [str(i+1) for i in range(10)]   
-
     # initial workspace setup
     workspaces = [None] * 10
     for name in [w['name'] for w in get_workspaces()]:
-        if name in allowed :
+        if name in ALLOWED :
             workspaces[int(name)-1] = name 
-    
-    
     info('Initial workspaces={}' .format(workspaces))
 
     # optimal workspace setup 
@@ -73,6 +71,25 @@ def shift_workspaces(count, right):
         return 1
     info('{} swaps were made.'.format(len(commits)))
     return 0
+
+
+def leftshift_possible():
+    """
+    Check that a default left shift is useful
+
+    return: True if a default shift would change anything
+    """
+    
+    # Get workspaces setup
+    ws = [None] * 10
+    for name in [w['name'] for w in get_workspaces()]:
+        if name in ALLOWED :
+            ws[int(name)-1] = name 
+
+    # Verify
+    if len(set(ws[-ws.count(None):]))==1:
+        return False
+    return True
 
 
 
